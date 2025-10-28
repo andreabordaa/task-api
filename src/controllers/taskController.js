@@ -6,8 +6,8 @@ export async function getTasks(req, res, next) {
 }
 
 export async function getTaskByIdHandler(req, res, next) {
-  let id = Number(req.params.id);
-  if (id == null) {
+  let id = parseInt(req.params.id);
+  if (!id) {
     return res.status(400).json({ message: 'ID must be a number' });
   }
   const task = await taskService.getTaskById(id);
