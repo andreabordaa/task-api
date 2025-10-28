@@ -1,0 +1,10 @@
+type: object
+properties:
+  error:
+    type: string
+    description: Validation failed
+  details:
+    type: array
+    items:
+      type: string
+      description: Task not found
