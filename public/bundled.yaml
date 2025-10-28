@@ -83,7 +83,12 @@ paths:
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
-          $ref: '#/components/responses/NotFound'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NotFound'
 components:
   schemas:
     Task:
@@ -109,13 +114,6 @@ components:
           type: array
           items:
             type: string
-  responses:
-    BadRequest:
-      description: Invalid input
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ValidationError'
     NotFound:
       type: object
       properties:
@@ -126,4 +124,11 @@ components:
           type: array
           items:
             type: string
-            description: Task not found
+            example: Task not found
+  responses:
+    BadRequest:
+      description: Invalid input
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ValidationError'

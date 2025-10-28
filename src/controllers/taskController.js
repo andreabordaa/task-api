@@ -6,9 +6,15 @@ export async function getTasks(req, res, next) {
 }
 
 export async function getTaskByIdHandler(req, res, next) {
-  let id = parseInt(req.params.id);
+  let id = Number(req.params.id);
+  if (id == null) {
+    return res.status(400).json({ message: 'ID must be a number' });
+  }
   const task = await taskService.getTaskById(id);
-  res.json(task);
+  if (!task) {
+    return res.status(404).json({ message: 'Task Not Found' });
+  }
+  res.status(200).json(task);
 }
 
 export async function createTask(req, res, next) {
